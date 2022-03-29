@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Flavor } from './flavor.entity';
 
 @Entity() // sql table === 'coffee'
 export class Coffee {
@@ -11,6 +12,9 @@ export class Coffee {
   @Column()
   brand: string;
 
-  @Column('json', {nullable: true})
+  @JoinTable() // helps specify the owner side of the relationship
+  @ManyToMany(
+    type => Flavor,
+    (flavor) => flavor.coffees) // first arg is fn that returns a reference to the related entity; second arg is fn that returns the related entity and specify what property needs to be selected that is the inverse side of the relationship i.e what is owner/ parent inside child
   flavors: string[];
 }
