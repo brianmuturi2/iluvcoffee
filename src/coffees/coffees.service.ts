@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException, Query } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
