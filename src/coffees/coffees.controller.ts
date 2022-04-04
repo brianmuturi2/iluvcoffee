@@ -9,13 +9,14 @@ import {
   Patch,
   Post,
   Query,
-  Res,
+  Res, SetMetadata,
   UsePipes, ValidationPipe
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Public } from '../common/decorators/public.decorator';
 
 @UsePipes(ValidationPipe)
 @Controller('coffees')
@@ -24,6 +25,7 @@ export class CoffeesController {
   constructor(private readonly coffeeService: CoffeesService) {
   }
 
+  @Public()
   @UsePipes(ValidationPipe)
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
